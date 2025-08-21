@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .product-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #fff;
+        }
+        .product-container img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        .product-info {
+            margin-top: 20px;
+        }
+        .product-info h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .product-info p {
+            font-size: 18px;
+            margin: 8px 0;
+        }
+        .rating {
+            color: gold;
+            font-size: 20px;
+        }
+        .comment-section {
+            margin-top: 30px;
+        }
+        .comment-section textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            resize: vertical;
+        }
+        .comment-section button {
+            padding: 10px 20px;
+            background: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .comment-section button:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="product-container" id="productContainer">
+        <!-- Product details will load here -->
+    </div>
+
+    <script>
+        const products = [
+            {
+                id: "masala-powder",
+                name: "Masala Powder",
+                image: "img/garam-masala.jpg",
+                price: "Rs. 250",
+                rating: 4.5,
+                description: "Premium quality masala powder with authentic flavor."
+            },
+            {
+                id: "pooja-thali",
+                name: "Pooja Thali",
+                image: "img/pooja-thali.jpg",
+                price: "Rs. 500",
+                rating: 4.8,
+                description: "Beautiful brass pooja thali set for all religious events."
+            },
+            {
+                id: "turmeric",
+                name: "Turmeric",
+                image: "img/turmeric.jpg",
+                price: "Rs. 150",
+                rating: 4.6,
+                description: "Pure organic turmeric powder for cooking and health."
+            },
+            {
+                id: "rice",
+                name: "Rice",
+                image: "img/rice.jpg",
+                price: "Rs. 2000 / 20kg",
+                rating: 4.7,
+                description: "High quality basmati rice, long grain and aromatic."
+            }
+        ];
+
+        // Get product from URL
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get("product");
+
+        const product = products.find(p => p.id === productId);
+        const container = document.getElementById("productContainer");
+
+        if (product) {
+            container.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <div class="product-info">
+                    <h1>${product.name}</h1>
+                    <p><strong>Price:</strong> ${product.price}</p>
+                    <p class="rating"><strong>Rating:</strong> ⭐ ${product.rating}</p>
+                    <p>${product.description}</p>
+                </div>
+                <div class="comment-section">
+                    <h3>Leave a Comment</h3>
+                    <textarea placeholder="Write your comment..."></textarea>
+                    <button>Submit</button>
+                </div>
+            `;
+        } else {
+            container.innerHTML = `<p>Product not found.</p>`;
+        }
+    </script>
+
+</body>
+</html>
